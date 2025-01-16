@@ -4,7 +4,7 @@ import numpy as np
 import plotly.express as px
 from analysis.functions import barplot, scatterplot
 
-df = pd.read_csv('data/df.csv')
+df = pd.read_csv('df.csv')
 
 # App
 st.set_page_config(layout="wide", initial_sidebar_state="expanded")
