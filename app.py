@@ -64,7 +64,7 @@ with st.expander(f"Your Selections yielded {shows['show_id'].nunique()} shows. C
     st.dataframe(shows, use_container_width=True)
 
 # Top 20 Shows by Popularity
-popularity = df[['name', 'popularity']].sort_values(by='popularity', 
+popularity = shows[['name', 'popularity']].sort_values(by='popularity', 
                                                     ascending=False).drop_duplicates(['name', 'popularity'])[:20]
 popularity['popularity'] = popularity['popularity'].round(2)
 
