@@ -11,7 +11,7 @@ st.set_page_config(layout="wide", initial_sidebar_state="expanded")
 st.title(":blue[TV Show Database]")
 st.write('Created by: Udit Bhandari')
 URL = "https://www.kaggle.com/datasets/denizbilginn/tv-shows"
-st.write("Click Here to View Data: [Kaggle](%s)"%URL)
+st.write("Click Here to View Data: [Kaggle](%s)" % URL)
 
 # sidebar
 st.sidebar.header('Choose your Options')
@@ -35,14 +35,15 @@ opt5 = st.sidebar.multiselect("Select Network",
                               )
 
 opt6 = st.sidebar.multiselect("Select Languages",
-                              options=df.query("spoken_language_name!='No Language'")
+                              options=df.query(
+                                  "spoken_language_name!='No Language'")
                               ['spoken_language_name'].unique().tolist(),
                               default=['English']
                               )
 
 shows = df.query(
     "genre_name==@opt1&number_of_seasons>=@opt2&status_name==@opt3&vote_average>=@opt4&network_name==@opt5&spoken_language_name==@opt6"
-    )
+)
 
 genre_count = shows.groupby('genre_name', as_index=False).agg(
     {"show_id": "nunique"}).sort_values(by='show_id', ascending=False)
@@ -64,8 +65,8 @@ with st.expander(f"Your Selections yielded {shows['show_id'].nunique()} shows. C
     st.dataframe(shows, use_container_width=True)
 
 # Top 20 Shows by Popularity
-popularity = shows[['name', 'popularity']].sort_values(by='popularity', 
-                                                    ascending=False).drop_duplicates(['name', 'popularity'])[:20]
+popularity = shows[['name', 'popularity']].sort_values(by='popularity',
+                                                       ascending=False).drop_duplicates(['name', 'popularity'])[:20]
 popularity['popularity'] = popularity['popularity'].round(2)
 
 popularity_bar = px.bar(popularity, x='name', y='popularity', labels='popularity',
@@ -88,8 +89,9 @@ fig2.update_layout(uniformtext_minsize=11, xaxis_tickangle=90, xaxis=dict(tickfo
 
 col3, col4 = st.columns(2)
 with col3:
-    st.plotly_chart(barplot(genre_count, 'genre_name', 'show_id', 'Number of Shows By Genre',
-                    'show_id'), theme="streamlit", use_container_width=True)
+    st.plotly_chart(barplot(genre_count, 'genre_name', 'show_id', 'Number of Shows By Genre', 'show_id',
+                            x_label='Genre',
+                            y_label='Count'), theme="streamlit", use_container_width=True)
 with col4:
     col4 = st.plotly_chart(fig2, theme="streamlit", use_container_width=True)
 
@@ -98,7 +100,9 @@ networks = shows[['network_name', 'show_id']].groupby('network_name', as_index=F
     {'show_id': "nunique"}).sort_values(by='show_id', ascending=False)
 
 st.plotly_chart(barplot(networks[:20], x='network_name', y='show_id', text='show_id',
-                title="Network Count"), theme="streamlit", use_container_width=True)
+                title="Network Count",
+                x_label='Network',
+                y_label='Number of Shows'), theme="streamlit", use_container_width=True)
 
 
 # Scatter Plot
@@ -114,7 +118,9 @@ languages = shows[['spoken_language_name', 'show_id']].dropna().\
 
 st.plotly_chart(
     barplot(languages, x='spoken_language_name', y='count',
-            title="TV Shows by Language", text='count'),
+            title="TV Shows by Language", text='count',
+            x_label='Language',
+            y_label='Number of Shows'),
     use_container_width=True
 )
 
@@ -130,10 +136,11 @@ data = pd.DataFrame(
     )
 )
 
-data = data.explode("spoken_language_name").sort_values(by='vote_average', ascending=False)
+data = data.explode("spoken_language_name").sort_values(
+    by='vote_average', ascending=False)
 data = pd.merge(data, df[['show_id', 'name']], how='left', on='show_id')
 
-violin = px.violin(data, x='spoken_language_name', 
+violin = px.violin(data, x='spoken_language_name',
                    y='vote_average', color='spoken_language_name',
                    box=True, title='Rating Distribution by Language')
 
@@ -160,7 +167,7 @@ hist.update_layout(
         font=dict(size=24),
         xanchor='center',
         yanchor='top'
-        ),
+    ),
     title_x=0.5,
 )
 st.plotly_chart(hist, use_container_width=True)

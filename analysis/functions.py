@@ -1,9 +1,10 @@
-import pandas as pd 
-import plotly.express as px 
+import pandas as pd
+import plotly.express as px
 import plotly.graph_objects as go
 
 
-def barplot(df: pd.DataFrame, x: str, y: str, title: str, text: str) -> go.Figure:
+def barplot(df: pd.DataFrame, x: str, y: str, title: str, text: str,
+            x_label: str, y_label: str = 'Count') -> go.Figure:
     '''
     Creates a plotly bar graph and returns a go.figure() object
     '''
@@ -21,8 +22,8 @@ def barplot(df: pd.DataFrame, x: str, y: str, title: str, text: str) -> go.Figur
         xaxis=dict(tickfont=dict(size=12)),
         yaxis=dict(tickfont=dict(size=12)),
         font=dict(family="Times New Roman"),
-        xaxis_title="Genre",
-        yaxis_title="Count",
+        xaxis_title=x_label,
+        yaxis_title=y_label,
         title=dict(
             font=dict(size=24),
             y=0.9,
@@ -44,23 +45,23 @@ def scatterplot(df: pd.DataFrame,
                 title: str,
                 xaxis_title: str = "xaxis_title",
                 yaxis_title: str = "yaxis_title") -> go.Figure:
-   '''
-    Creates a plotly scatter plot and returns a go.Figure() object
-   '''
-   fig2 = px.scatter(df, x=x, y=y, color=color, title=title)
-   fig2.update_layout(
-       xaxis_title=xaxis_title,
-       yaxis_title=yaxis_title,
-       width=1000, height=500,
-       title=dict(
-           font=dict(size=24),
-           y=0.9,
-           x=0.5,
-           xanchor='center',
-           yanchor='top'
-       ),
-       xaxis=dict(tickfont=dict(size=12)),
-       yaxis=dict(tickfont=dict(size=12)),
-       title_x=0.5)
-   fig2.update_traces(marker=dict(size=11, opacity=0.5))
-   return fig2
+    '''
+     Creates a plotly scatter plot and returns a go.Figure() object
+    '''
+    fig2 = px.scatter(df, x=x, y=y, color=color, title=title)
+    fig2.update_layout(
+        xaxis_title=xaxis_title,
+        yaxis_title=yaxis_title,
+        width=1000, height=500,
+        title=dict(
+            font=dict(size=24),
+            y=0.9,
+            x=0.5,
+            xanchor='center',
+            yanchor='top'
+        ),
+        xaxis=dict(tickfont=dict(size=12)),
+        yaxis=dict(tickfont=dict(size=12)),
+        title_x=0.5)
+    fig2.update_traces(marker=dict(size=11, opacity=0.5))
+    return fig2
