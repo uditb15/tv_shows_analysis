@@ -28,18 +28,18 @@ To get started with the project, follow these steps:
 
 1. **Clone the Repository:**
 
-    ```bash
-    git clone https://github.com/yourusername/tv-shows-analysis.git
-    cd tv-shows-analysis
-    ```
+   ```bash
+   git clone https://github.com/yourusername/tv-shows-analysis.git
+   cd tv-shows-analysis
+   ```
 
 2. **Install Dependencies:**
 
-    Install all the required libraries listed in the `requirements.txt` file by running:
+   Install all the required libraries listed in the `requirements.txt` file by running:
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+   ```bash
+   pip install -r requirements.txt
+   ```
 
    This will install the necessary dependencies, including `pandas`, `numpy`, `streamlit`, and `plotly`, among others.
 
@@ -50,6 +50,7 @@ Once the project is set up, you can explore the analysis through the provided Ju
 ### Step-by-Step Guide:
 
 1. **Open the Jupyter Notebooks:**
+
    - Navigate to the `notebooks/` folder and open the analysis notebook, for example:
 
      ```bash
@@ -59,6 +60,7 @@ Once the project is set up, you can explore the analysis through the provided Ju
    - This will launch a Jupyter notebook where you can follow along with the data exploration, visualization, and insights generation process.
 
 2. **Run the Streamlit Dashboard (Optional):**
+
    - You can interact with the data through a Streamlit interface by running the following command:
 
      ```bash
@@ -91,30 +93,26 @@ The project is organized into the following directory structure:
 ```
 tv-shows-analysis/
 │
-├── data/                   
+├── data/
 │   ├── network.csv
 │   ├── genres.csv
 │   └── status.csv
-    └── .gitignore
+|   └── .gitignore
 │
-├── notebooks/              
-│   ├── 01-data-exploration.ipynb
-│   ├── 02-genre-analysis.ipynb
-│   └── 03-network-performance.ipynb
+├── notebooks/
+│   ├── analysis.ipynb
+│   ├── functions.py
 │
-├── app.py                  
-├── requirements.txt    
-├── README.md     
+│
+├── app.py
+├── requirements.txt
+├── README.md
 ```
 
 ### Folder Breakdown:
 
 - **`data/`**: This folder contains the raw data files sourced from Kaggle. It includes CSV or JSON files for networks, genres, ratings, language types, and other relevant information.
-  
 - **`notebooks/`**: Jupyter notebooks where the data analysis is performed. These notebooks provide a step-by-step breakdown of the data exploration process, from cleaning to visualization.
-  
 - **`app.py`**: A Streamlit app that offers an interactive way to visualize and filter the data. This allows users to dynamically explore the TV show dataset and view different insights.
-  
 - **`requirements.txt`**: A list of Python libraries required to run the project. This file includes dependencies like `pandas`, `numpy`, `streamlit`, and `plotly`.
-  
 - **`README.md`**: This file, which provides an overview of the project, installation instructions, and usage guidelines.
